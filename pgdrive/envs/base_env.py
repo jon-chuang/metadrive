@@ -87,6 +87,9 @@ BASE_DEFAULT_CONFIG = dict(
     _debug_crash_object=False,
     record_episode=False,
     horizon=None,  # The maximum length of each episode. Set to None to remove system.
+
+
+debug_should_done_always_false=False,
 )
 
 
@@ -311,7 +314,12 @@ class BasePGDriveEnv(gym.Env):
             done = done_function_result or self.dones[v_id]
             self.dones[v_id] = done
 
-        should_done = self.config["horizon"] and self.episode_steps >= self.config["horizon"]
+
+        if self.config["debug_should_done_always_false"]:
+            should_done = False
+        else:
+            should_done = self.config["horizon"] and self.episode_steps >= self.config["horizon"]
+
         termination_infos = self.for_each_vehicle(auto_termination, should_done)
 
         step_infos = concat_step_infos([
