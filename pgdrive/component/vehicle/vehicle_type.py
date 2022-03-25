@@ -16,6 +16,9 @@ class DefaultVehicle(BaseVehicle):
     REAR_WHEELBASE = 1.4166
     path = [['ferra/scene.gltf', (factor, factor, factor), (0, 0.0, 0.), 0]]
 
+class StaticDefaultVehicle(DefaultVehicle):
+    PARAMETER_SPACE = ParameterSpace(VehicleParameterSpace.STATIC_DEFAULT_VEHICLE)
+
 
 class XLVehicle(BaseVehicle):
     PARAMETER_SPACE = ParameterSpace(VehicleParameterSpace.XL_VEHICLE)
@@ -78,7 +81,11 @@ class SVehicle(BaseVehicle):
     ]
 
 
-vehicle_type = {"s": SVehicle, "m": MVehicle, "l": LVehicle, "xl": XLVehicle, "default": DefaultVehicle}
+vehicle_type = {
+    "s": SVehicle, "m": MVehicle, "l": LVehicle, "xl": XLVehicle,
+    "default": DefaultVehicle,
+    "static_default": StaticDefaultVehicle
+}
 
 
 def random_vehicle_type(np_random, p=None):
