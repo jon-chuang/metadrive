@@ -43,6 +43,11 @@ class WaymoDataManager(BaseManager):
             while len(self.loaded_case) >= self.max_len:
                 should_remove = self.loaded_case.popleft()
                 tmp = self.waymo_case.pop(should_remove)
+
+                # import gc
+                # gc.collect()
+                # print("GC: DATA-MANAGER ", len(gc.get_referrers(tmp)))
+
                 del tmp
                 # print("[DataManager] Existing cases {} / {} exceeds the max len {}".format(len(self.loaded_case), len(self.waymo_case), self.max_len))
 

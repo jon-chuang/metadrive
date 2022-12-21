@@ -1,3 +1,4 @@
+import copy
 import logging
 
 from metadrive.component.map.base_map import BaseMap
@@ -10,11 +11,11 @@ from metadrive.component.road_network.edge_road_network import EdgeRoadNetwork
 class WaymoMap(BaseMap):
     def __init__(self, waymo_data, random_seed=None):
         self.map_id = waymo_data["id"]
-        self.waymo_data = waymo_data
-        super(WaymoMap, self).__init__(dict(id=waymo_data["id"]))
+        self.map_data = waymo_data["map"]
+        super(WaymoMap, self).__init__(dict(id=self.map_id))
 
     def _generate(self):
-        block = WaymoBlock(0, self.road_network, 0, self.waymo_data["map"])
+        block = WaymoBlock(0, self.road_network, 0, self.map_data)
         block.construct_block(self.engine.worldNP, self.engine.physics_world)
         self.blocks.append(block)
 
@@ -31,7 +32,7 @@ class WaymoMap(BaseMap):
         return EdgeRoadNetwork
 
     def destroy(self):
-        self.waymo_data = None
+        self.map_data = None
         super(WaymoMap, self).destroy()
 
     def __del__(self):

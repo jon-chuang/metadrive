@@ -47,7 +47,6 @@ class BaseMap(BaseRunnable):
         self.blocks = []
 
         # Generate map and insert blocks
-        self.engine = get_engine()
         self._generate()
         assert self.blocks, "The generate methods does not fill blocks!"
 
@@ -82,11 +81,13 @@ class BaseMap(BaseRunnable):
         self.detach_from_world()
         for block in self.blocks:
             block.destroy()
-        self.blocks = None
-        self.road_network.destroy()
+        self.blocks = []
+        if self.road_network is not None:
+            self.road_network.destroy()
         self.road_network = None
         self.spawn_roads = None
-        super(BaseMap, self).destroy()
+        # super(BaseMap, self).destroy()
+        self._config.clear()
 
     @property
     def road_network_type(self):
@@ -95,3 +96,7 @@ class BaseMap(BaseRunnable):
     def get_center_point(self):
         x_min, x_max, y_min, y_max = self.road_network.get_bounding_box()
         return (x_max + x_min) / 2, (y_max + y_min) / 2
+
+    @property
+    def engine(self):
+        return get_engine()

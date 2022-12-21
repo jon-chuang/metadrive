@@ -35,8 +35,8 @@ class WaymoTrajectoryNavigation(BaseNavigation):
         )
         self.reference_trajectory = None
 
-    def reset(self, map, current_lane, destination=None, random_seed=None):
-        super(WaymoTrajectoryNavigation, self).reset(map, current_lane)
+    def reset(self):
+        super(WaymoTrajectoryNavigation, self).reset(map=None, current_lane=None)
         self.reference_trajectory = self.get_trajectory()
         self.set_route(None, None)
 
