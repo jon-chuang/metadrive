@@ -446,7 +446,7 @@ class BaseVehicle(BaseObject, BaseVehicleState):
 
     def _dist_to_route_left_right(self):
         # TODO
-        if self.navigation is None or self.navigation.current_ref_lanes is None:
+        if self.navigation is None or self.navigation.current_ref_lanes is None or self.navigation.current_ref_lanes[0]:
             return 0, 0
         current_reference_lane = self.navigation.current_ref_lanes[0]
         _, lateral_to_reference = current_reference_lane.local_coordinates(self.position)
@@ -652,7 +652,6 @@ class BaseVehicle(BaseObject, BaseVehicleState):
             navi = NodeNetworkNavigation if self.engine.current_map.road_network_type == NodeRoadNetwork \
                 else EdgeNetworkNavigation
         self.navigation = navi(
-            # self.engine,
             show_navi_mark=self.engine.global_config["vehicle_config"]["show_navi_mark"],
             random_navi_mark_color=self.engine.global_config["vehicle_config"]["random_navi_mark_color"],
             show_dest_mark=self.engine.global_config["vehicle_config"]["show_dest_mark"],
