@@ -445,8 +445,8 @@ class BaseVehicle(BaseObject, BaseVehicleState):
         self.dist_to_left_side, self.dist_to_right_side = self._dist_to_route_left_right()
 
     def _dist_to_route_left_right(self):
-        # TODO
-        if self.navigation is None or self.navigation.current_ref_lanes is None or self.navigation.current_ref_lanes[0]:
+        if self.navigation is None or self.navigation.current_ref_lanes is None or \
+                self.navigation.current_ref_lanes[0] is not None:
             return 0, 0
         current_reference_lane = self.navigation.current_ref_lanes[0]
         _, lateral_to_reference = current_reference_lane.local_coordinates(self.position)
