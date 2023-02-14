@@ -215,7 +215,7 @@ class MainCamera:
         :param vehicle: BaseVehicle
         :return: position on the center lane
         """
-        if vehicle.navigation.current_ref_lanes is None:
+        if vehicle.navigation.current_ref_lanes is None or vehicle.navigation.current_ref_lanes[0] is None:
             raise ValueError("No routing module, I don't know which lane to follow")
 
         lane = vehicle.navigation.current_ref_lanes[0]

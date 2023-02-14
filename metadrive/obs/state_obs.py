@@ -84,7 +84,8 @@ class StateObservation(ObservationBase):
             lateral_to_right /= total_width
             info += [clip(lateral_to_left, 0.0, 1.0), clip(lateral_to_right, 0.0, 1.0)]
 
-        if vehicle.navigation is None or vehicle.navigation.current_ref_lanes is None:
+        if vehicle.navigation is None or vehicle.navigation.current_ref_lanes is None or \
+                vehicle.navigation.current_ref_lanes[-1] is None:
             info += [0] * 5
         else:
             current_reference_lane = vehicle.navigation.current_ref_lanes[-1]
