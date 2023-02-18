@@ -80,16 +80,16 @@ version = "0.2.6.0"
 
 
 install_requires = [
-    "gym==0.19.0",
-    "numpy",
+    "gym>=0.20.0, <=0.24.0",
+    "numpy>=1.21.6, <=1.24.2",
     "matplotlib",
     "pandas",
     "pygame",
     "tqdm",
     "yapf",
     "seaborn",
-    "tqdm",
-    "panda3d==1.10.8",
+    "tqdm",    
+    "panda3d>=1.10.8, <=1.10.13",
     "panda3d-gltf",
     "panda3d-simplepbr",
     "pillow",
@@ -106,7 +106,7 @@ install_requires = [
 
 setup(
     name="metadrive-simulator",
-    python_requires='>=3.7, <=3.9',
+    python_requires='>=3.7, <3.10',
     version=version,
     description="An open-ended driving simulator with infinite scenes",
     url="https://github.com/metadriverse/metadrive",
